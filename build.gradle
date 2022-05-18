@@ -10,11 +10,12 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.cucumber:cucumber-java:7.3.4'
-    implementation 'org.awaitility:awaitility:4.2.0'
-
+    testImplementation 'io.cucumber:cucumber-java:7.3.4'
+    testImplementation 'org.awaitility:awaitility:4.2.0'
     testImplementation 'io.cucumber:cucumber-junit:7.3.4'
     testImplementation 'io.rest-assured:rest-assured:5.0.1'
+    testImplementation 'com.google.code.gson:gson:2.9.0'
+
 }
 
 configurations {
@@ -22,7 +23,6 @@ configurations {
         extendsFrom testImplementation
     }
 }
-
 
 task cucumber() {
     dependsOn assemble, testClasses
@@ -33,8 +33,7 @@ task cucumber() {
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = [
                     '--plugin', 'pretty',
-                    '--glue', 'hooks',
-                    'src/test/resources']
+                    '--glue', 'hooks', 'src/test/resources']
         }
     }
 }

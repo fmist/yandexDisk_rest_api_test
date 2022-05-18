@@ -5,6 +5,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
+import pojo.GetInfo;
+import pojo.ResponseItem;
 
 import java.util.List;
 
@@ -59,6 +61,16 @@ public class Steps {
     @And("get body")
     public void getBody() {
         response.then().log().body(true);
+    }
+
+    @And("calculate files sizes in {string}")
+    public void calculateFilesSizes(String resource) {
+        response = setQuery(GET, "?path=" + resource + "");
+//        response.jsonPath().get("_embedded.items");
+//        ResponseItem responseItem = response.jsonPath().getObject("", ResponseItem.class);
+        GetInfo getInfo = response.jsonPath().getObject("", GetInfo.class);
+        System.out.println(getInfo.getResponse().get(1));
+        int a = 0;
     }
 }
 
