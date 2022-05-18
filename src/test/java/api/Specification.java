@@ -22,10 +22,14 @@ public class Specification {
         return given(authorisation())
                 .baseUri(URL)
                 .when()
-                .request(method, path)
-                .then()
-                .log().all()
-                .extract().response();
+                .request(method, path);
+    }
+
+    public static Response setQuery(Method method, String url, String path) {
+        return given(authorisation())
+                .baseUri(url)
+                .when()
+                .request(method, path);
     }
 
 

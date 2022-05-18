@@ -11,6 +11,8 @@ repositories {
 
 dependencies {
     implementation 'io.cucumber:cucumber-java:7.3.4'
+    implementation 'org.awaitility:awaitility:4.2.0'
+
     testImplementation 'io.cucumber:cucumber-junit:7.3.4'
     testImplementation 'io.rest-assured:rest-assured:5.0.1'
 }
@@ -21,10 +23,12 @@ configurations {
     }
 }
 
+
 task cucumber() {
     dependsOn assemble, testClasses
     doLast {
         javaexec {
+
             main = "io.cucumber.core.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = [
