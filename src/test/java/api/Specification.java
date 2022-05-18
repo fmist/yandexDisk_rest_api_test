@@ -18,15 +18,16 @@ public class Specification {
                 .header("Accept", "application/json");
     }
 
-    public static Response request(Method method, String path) {
+    public static Response setQuery(Method method, String path) {
         return given(authorisation())
                 .baseUri(URL)
                 .when()
                 .request(method, path)
                 .then()
-                .log().ifError()
+                .log().all()
                 .extract().response();
     }
+
 
 
 
