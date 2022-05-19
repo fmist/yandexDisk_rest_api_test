@@ -4,11 +4,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
-import pojo.GetInfo;
-import pojo.ResponseItem;
+import org.junit.Assert;
+import pojo.getInfo.GetInfo;
+import pojo.getInfo.ItemsItem;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static api.Routes.FILE_URL;
 import static api.Routes.TRASH_URL;
@@ -18,9 +20,8 @@ import static api.Waiter.waitStatusCode;
 import static io.restassured.http.Method.*;
 
 public class Steps {
-
     Response response;
-    ValidatableResponse json;
+    GetInfo getInfo;
 
     @Given("create resource {string}")
     public void createResource(String name) {
@@ -51,7 +52,7 @@ public class Steps {
     public void restoreResource(String name) {
         response = setQuery(GET, TRASH_URL, "?path=");
         List<String> paths = response.jsonPath().getList("_embedded.items.path");
-        for (String path: paths) {
+        for (String path : paths) {
             if (path.contains(name)) {
                 response = setQuery(PUT, TRASH_URL, "/restore?path=" + path);
             }
@@ -63,14 +64,49 @@ public class Steps {
         response.then().log().body(true);
     }
 
-    @And("calculate files sizes in {string}")
-    public void calculateFilesSizes(String resource) {
-        response = setQuery(GET, "?path=" + resource + "");
-//        response.jsonPath().get("_embedded.items");
-//        ResponseItem responseItem = response.jsonPath().getObject("", ResponseItem.class);
-        GetInfo getInfo = response.jsonPath().getObject("", GetInfo.class);
-        System.out.println(getInfo.getResponse().get(1));
-        int a = 0;
+    @And("check sum sizes must be {int}")
+    public void calculateFilesSizes(int expectedSize) {
+        List<ItemsItem> items = getInfo.getEmbedded().getItems();
+        int sum = 0;
+        for (int i = 0; i < items.size(); i++) {
+            sum = items.stream().mapToInt(ItemsItem::getSize).sum();
+        }
+        Assert.assertEquals(expectedSize, sum);
+    }
+
+    @And("get info about {string}")
+    public void getInfoAboutResource(String name) {
+        response = setQuery(GET, "?path=" + name + "");
+        getInfo = response.jsonPath().getObject("", GetInfo.class);
+    }
+
+    @And("check {string} must be {string}")
+    public void checkSomethingMustBe(String key, String value) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("antivirusStatus", getInfo.getEmbedded().getItems().get(0).antivirusStatus);
+        map.put("commentIds", getInfo.getEmbedded().getItems().get(0).commentIds);
+        map.put("created", getInfo.getEmbedded().getItems().get(0).created);
+        map.put("exif", getInfo.getEmbedded().getItems().get(0).exif);
+        map.put("file", getInfo.getEmbedded().getItems().get(0).file);
+        map.put("md5", getInfo.getEmbedded().getItems().get(0).md5);
+        map.put("mediaType", getInfo.getEmbedded().getItems().get(0).mediaType);
+        map.put("modified", getInfo.getEmbedded().getItems().get(0).modified);
+        map.put("name", getInfo.getEmbedded().getItems().get(0).name);
+        map.put("path", getInfo.getEmbedded().getItems().get(0).path);
+        map.put("preview", getInfo.getEmbedded().getItems().get(0).preview);
+        map.put("resourceId", getInfo.getEmbedded().getItems().get(0).resourceId);
+        map.put("revision", getInfo.getEmbedded().getItems().get(0).revision);
+        map.put("type", getInfo.getEmbedded().getItems().get(0).type);
+        map.put("mimeType", getInfo.getEmbedded().getItems().get(0).mimeType);
+        map.put("sha256", getInfo.getEmbedded().getItems().get(0).sha256);
+        map.put("size", getInfo.getEmbedded().getItems().get(0).size);
+        Assert.assertEquals(value, map.get(key));
+    }
+
+    @And("do {string} resource from {string} to {string}")
+    public void moveResource(String action, String oldParam, String newParam) {
+        response = setQuery(POST, "/" + action + "?from=" + oldParam + "&path=" + newParam);
+        response.then().log().ifError();
     }
 }
 

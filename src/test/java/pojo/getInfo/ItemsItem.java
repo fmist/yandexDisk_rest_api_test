@@ -1,59 +1,59 @@
-package pojo;
+package pojo.getInfo;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ResponseItem{
+public class ItemsItem{
 
 	@SerializedName("preview")
-	private String preview;
+	public String preview;
 
 	@SerializedName("sha256")
-	private String sha256;
+	public String sha256;
 
 	@SerializedName("created")
-	private String created;
+	public String created;
 
 	@SerializedName("type")
-	private String type;
+	public String type;
 
 	@SerializedName("antivirus_status")
-	private String antivirusStatus;
+	public String antivirusStatus;
 
 	@SerializedName("revision")
-	private long revision;
+	public long revision;
 
 	@SerializedName("path")
-	private String path;
+	public String path;
 
 	@SerializedName("file")
-	private String file;
+	public String file;
 
 	@SerializedName("size")
-	private int size;
+	public int size;
 
 	@SerializedName("mime_type")
-	private String mimeType;
+	public String mimeType;
 
 	@SerializedName("media_type")
-	private String mediaType;
+	public String mediaType;
 
 	@SerializedName("name")
-	private String name;
+	public String name;
 
 	@SerializedName("resource_id")
-	private String resourceId;
+	public String resourceId;
 
 	@SerializedName("modified")
-	private String modified;
+	public String modified;
 
 	@SerializedName("comment_ids")
-	private CommentIds commentIds;
+	public CommentIds commentIds;
 
 	@SerializedName("exif")
-	private Exif exif;
+	public Exif exif;
 
 	@SerializedName("md5")
-	private String md5;
+	public String md5;
 
 	public String getPreview(){
 		return preview;

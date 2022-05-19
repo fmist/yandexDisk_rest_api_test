@@ -1,10 +1,6 @@
 package hooks;
 
-import api.Routes;
-import api.Specification;
-import api.Waiter;
 import io.cucumber.java.AfterAll;
-import io.restassured.http.Method;
 import io.restassured.response.Response;
 
 import static api.Routes.TRASH_URL;

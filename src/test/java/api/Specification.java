@@ -5,7 +5,8 @@ import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-import static api.Routes.*;
+import static api.Routes.URL;
+import static api.Routes.getTOKEN;
 import static io.restassured.RestAssured.given;
 
 public class Specification {

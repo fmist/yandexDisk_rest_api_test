@@ -1,3 +1,4 @@
+@create
 Feature: test1
 
   Scenario: create folder, create file, delete file, delete folder
