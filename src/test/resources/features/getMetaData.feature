@@ -2,16 +2,16 @@
 Feature: test foo
 
   Scenario: test foo
-    Given create resource "folder6"
+    Given create resource "5"
     Then status code is 201
-    And create resource "folder6/subfolder"
+    And create resource "5/subfolder"
     Then status code is 201
-    And upload file "text.jpg" to "folder6/subfolder"
+    And upload file "text.jpg" to "5/subfolder"
     Then operation status is success
-    And get info about "folder6/subfolder"
+    And get info about "5/subfolder"
     And check "mediaType" must be "image"
     And check "type" must be "file"
     And check "mimeType" must be "image/jpeg"
-    Then delete resource "folder6"
+    Then delete resource "5"
     Then operation status is success
 

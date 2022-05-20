@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'io.qameta.allure' version '2.9.6'
 }
 
 group 'org.example'
@@ -9,14 +10,30 @@ repositories {
     mavenCentral()
 }
 
-def cucumberVersion = "7.3.2"
+allure {
+    version = '2.17.0'
+}
+
+task cleanReportsDir {
+    delete project.property('reportsDir')
+    delete 'build/allure-results'
+}
+
+def cucumberVersion = "7.2.2"
+def restAssuredVersion = "5.0.1"
+def awaitilityVersion = "4.2.0"
+def gsonVersion = "2.9.0"
+def allureVersion = "2.17.0"
 
 dependencies {
     testImplementation "io.cucumber:cucumber-java:$cucumberVersion"
-    testImplementation 'org.awaitility:awaitility:4.2.0'
+    testImplementation "org.awaitility:awaitility:$awaitilityVersion"
     testImplementation "io.cucumber:cucumber-junit:$cucumberVersion"
-    testImplementation 'io.rest-assured:rest-assured:5.0.1'
-    testImplementation 'com.google.code.gson:gson:2.9.0'
+    testImplementation "io.rest-assured:rest-assured:$restAssuredVersion"
+    testImplementation "com.google.code.gson:gson:$gsonVersion"
+    testImplementation "io.qameta.allure:allure-cucumber7-jvm:$allureVersion"
+    testImplementation "io.qameta.allure:allure-rest-assured:$allureVersion"
+    testImplementation "org.slf4j:slf4j-nop:1.7.13"
 }
 
 configurations {
@@ -26,20 +43,21 @@ configurations {
 }
 
 task cucumber() {
-    dependsOn assemble, testClasses
+    dependsOn assemble, testClasses, cleanReportsDir
     doLast {
         javaexec {
             main = "io.cucumber.core.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = [
-                    '--plugin', 'pretty',
-                    '--glue', 'hooks', 'src/test/resources']
             if (System.getProperty("cucumber.filter.tags")) {
                 systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
             }
+            systemProperty("allure.results.directory", "build/allure-results")
+            args = [
+                    '--plugin', 'pretty',
+                    '--plugin', 'io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm',
+                     '--threads', System.getProperty("cucumber.feature") ? 1 : 9,
+                    '--glue', 'hooks', 'src/test/resources']
         }
     }
-}
-
-test {
+    cucumber.finalizedBy 'allureReport'
 }
