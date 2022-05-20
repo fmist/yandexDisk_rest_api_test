@@ -1,32 +1,1 @@
-@create
-Feature: test1
-
-  Scenario: create folder, create file, delete file, delete folder
-    Given create resource "folder1"
-    Then status code is 201
-    And upload file "1.jpg" to "folder1"
-    Then operation status is success
-    And delete resource "folder1/1.jpg"
-    Then status code is 204
-    And delete resource "folder1"
-    Then status code is 204
-
-  Scenario: create folder, create file, delete folder with file
-    Given create resource "folder1"
-    Then status code is 201
-    And upload file "1.jpg" to "folder1"
-    Then operation status is success
-    And delete resource "folder1"
-    Then operation status is success
-
-  Scenario: create folder, create file, delete file, restore file, delete file and folder
-    Given create resource "folder1"
-    Then status code is 201
-    And upload file "1.jpg" to "folder1"
-    Then operation status is success
-    And delete resource "folder1/1.jpg"
-    Then status code is 204
-    And restore resource "1.jpg"
-    Then status code is 201
-    And delete resource "folder1"
-    Then operation status is success
+@createFeature: test1  Scenario: create folder, create file, delete file, delete folder    Given create resource "folder3"    Then status code is 201    And upload file "3.jpg" to "folder3"    Then operation status is success    And delete resource "folder3/3.jpg"    Then status code is 204    And delete resource "folder3"    Then status code is 204  Scenario: create folder, create file, delete folder with file    Given create resource "folder4"    Then status code is 201    And upload file "4.jpg" to "folder4"    Then operation status is success    And delete resource "folder4"    Then operation status is success  Scenario: create folder, create file, delete file, restore file, delete file and folder    Given create resource "folder5"    Then status code is 201    And upload file "5.jpg" to "folder5"    Then operation status is success    And delete resource "folder5/5.jpg"    Then status code is 204    And get info about "trash"    Then status code is 200    And restore resource "5.jpg"    Then status code is 201    And delete resource "folder5"    Then operation status is success

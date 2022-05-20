@@ -2,11 +2,11 @@
 Feature: copy resource
 
   Scenario: create folder, copy folder
-    Given create resource "folder"
+    Given create resource "folder2"
     Then status code is 201
-    And do "copy" resource from "folder" to "copyFolder"
+    And do "copy" resource from "folder2" to "copyFolder"
     Then status code is 201
-    And delete resource "folder"
+    And delete resource "folder2"
     Then status code is 204
     And delete resource "copyFolder"
     Then status code is 204

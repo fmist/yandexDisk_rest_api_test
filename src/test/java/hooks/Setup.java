@@ -1,6 +1,7 @@
 package hooks;
 
 import io.cucumber.java.AfterAll;
+import io.cucumber.java.BeforeAll;
 import io.restassured.response.Response;
 
 import static api.Routes.TRASH_URL;
@@ -14,5 +15,10 @@ public class Setup {
         Response response = setQuery(DELETE, TRASH_URL, "?path=");
         waitStatusCode(response, 202, 204);
         System.out.println("trash cleaned");
+    }
+
+    @BeforeAll
+    public static void setup() {
+        System.setProperty("java.util.logging.SimpleFormatter.format", "%1$tT %4$s %5$s%6$s%n");
     }
 }

@@ -1,1 +1,45 @@
-plugins {    id 'java'}group 'org.example'version '1.0-SNAPSHOT'repositories {    mavenCentral()}dependencies {    testImplementation 'io.cucumber:cucumber-java:7.3.4'    testImplementation 'org.awaitility:awaitility:4.2.0'    testImplementation 'io.cucumber:cucumber-junit:7.3.4'    testImplementation 'io.rest-assured:rest-assured:5.0.1'    testImplementation 'com.google.code.gson:gson:2.9.0'}configurations {    cucumberRuntime {        extendsFrom testImplementation    }}task cucumber() {    dependsOn assemble, testClasses    doLast {        javaexec {            main = "io.cucumber.core.cli.Main"            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output            args = [                    '--plugin', 'pretty',                    '--glue', 'hooks', 'src/test/resources']            if (System.getProperty("cucumber.filter.tags")) {                systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")            }        }    }}test {    useJUnitPlatform()}
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+def cucumberVersion = "7.3.2"
+
+dependencies {
+    testImplementation "io.cucumber:cucumber-java:$cucumberVersion"
+    testImplementation 'org.awaitility:awaitility:4.2.0'
+    testImplementation "io.cucumber:cucumber-junit:$cucumberVersion"
+    testImplementation 'io.rest-assured:rest-assured:5.0.1'
+    testImplementation 'com.google.code.gson:gson:2.9.0'
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '--plugin', 'pretty',
+                    '--glue', 'hooks', 'src/test/resources']
+            if (System.getProperty("cucumber.filter.tags")) {
+                systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
+            }
+        }
+    }
+}
+
+test {
+}

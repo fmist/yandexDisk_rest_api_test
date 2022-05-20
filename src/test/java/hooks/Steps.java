@@ -49,12 +49,12 @@ public class Steps {
     }
 
     @Then("restore resource {string}")
-    public void restoreResource(String name) {
-        response = setQuery(GET, TRASH_URL, "?path=");
-        List<String> paths = response.jsonPath().getList("_embedded.items.path");
-        for (String path : paths) {
-            if (path.contains(name)) {
-                response = setQuery(PUT, TRASH_URL, "/restore?path=" + path);
+    public void restoreResource(String name){
+        List<ItemsItem> paths = getInfo.getEmbedded().getItems();
+        for (ItemsItem path : paths) {
+            if (path.path.contains(name)) {
+                response = setQuery(PUT, TRASH_URL, "/restore?path=" + path.path);
+                response.then().log().ifError();
             }
         }
     }
@@ -76,7 +76,11 @@ public class Steps {
 
     @And("get info about {string}")
     public void getInfoAboutResource(String name) {
-        response = setQuery(GET, "?path=" + name + "");
+        if (name.equals("trash")) {
+            response = setQuery(GET, TRASH_URL, "?path=");
+        } else {
+            response = setQuery(GET, "?path=" + name + "");
+        }
         getInfo = response.jsonPath().getObject("", GetInfo.class);
     }
 
@@ -104,8 +108,8 @@ public class Steps {
     }
 
     @And("do {string} resource from {string} to {string}")
-    public void moveResource(String action, String oldParam, String newParam) {
-        response = setQuery(POST, "/" + action + "?from=" + oldParam + "&path=" + newParam);
+    public void moveResource(String action, String beforeParameter, String afterParameter) {
+        response = setQuery(POST, "/" + action + "?from=" + beforeParameter + "&path=" + afterParameter);
         response.then().log().ifError();
     }
 }
