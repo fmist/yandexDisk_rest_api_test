@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc1918b3-1a96-46ce-94fa-0e48d39cdb9e" name="Changes" comment="2005#1">
-      <change afterPath="$PROJECT_DIR$/src/test/resources/features/create.feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/features/restoreResource.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/api/Specification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/api/Specification.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/api/Waiter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/api/Waiter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hooks/Setup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hooks/Setup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/calcSizes.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/calcSizes.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/copyResource.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/copyResource.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/create.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/getMetaData.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/getMetaData.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/moveResource.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/moveResource.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/api/Routes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/api/Routes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hooks/Steps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hooks/Steps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/features/getMetaData.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/getMetaData.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,12 +44,6 @@
                 <item name="yandexDisk_rest_api_test" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="other" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="yandexDisk_rest_api_test" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="verification" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -99,15 +86,16 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "/Users/grbm/IdeaProjects/yandexDisk_rest_api_test/src/test/resources",
-    "project.structure.last.edited": "SDKs",
+    "last_opened_file_path": "D:/Git/yandexDisk_rest_api_test/src/test/resources/features",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settingsDialog.application.dockerConsole"
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Git\yandexDisk_rest_api_test\src\test\resources\features" />
       <recent name="$PROJECT_DIR$/src/test/resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -152,6 +140,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Feature: getMetaDataExtended" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/getMetaDataExtended.feature" />
+      <option name="GLUE" value="hooks" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="yandexDisk_rest_api_test.test" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter" />
+      <shortenClasspath name="NONE" />
+      <option name="SUGGESTED_NAME" value="Feature: getMetaDataExtended" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Feature: moveResource" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/moveResource.feature" />
@@ -181,27 +189,6 @@
       <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter" />
       <shortenClasspath name="NONE" />
       <option name="SUGGESTED_NAME" value="Feature: restoreResource" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="io.cucumber.core.cli.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Scenario: create folder, move folder to another folder" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
-      <option name="CUCUMBER_CORE_VERSION" value="5" />
-      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/moveResource.feature" />
-      <option name="GLUE" value="hooks" />
-      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
-      <module name="yandexDisk_rest_api_test.test" />
-      <option name="NAME_FILTER" value="^create folder\, move folder to another folder$" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^create folder\, move folder to another folder$&quot;" />
-      <shortenClasspath name="NONE" />
-      <option name="SUGGESTED_NAME" value="Scenario: create folder, move folder to another folder" />
       <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
       <extension name="coverage">
         <pattern>
@@ -260,13 +247,20 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Cucumber Java.Feature: getMetaData" />
+      <item itemvalue="Cucumber Java.Feature: getMetaDataExtended" />
+      <item itemvalue="Cucumber Java.Feature: moveResource" />
+      <item itemvalue="Cucumber Java.Feature: restoreResource" />
+      <item itemvalue="Gradle.yandexDisk_rest_api_test [cucumber]" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Cucumber Java.Feature: getMetaData" />
+        <item itemvalue="Cucumber Java.Feature: getMetaDataExtended" />
         <item itemvalue="Gradle.yandexDisk_rest_api_test [cucumber]" />
         <item itemvalue="Cucumber Java.Feature: restoreResource" />
         <item itemvalue="Cucumber Java.Feature: moveResource" />
-        <item itemvalue="Cucumber Java.Scenario: create folder, move folder to another folder" />
-        <item itemvalue="Cucumber Java.Feature: getMetaData" />
       </list>
     </recent_temporary>
   </component>
@@ -311,5 +305,20 @@
     <MESSAGE value="1805#3" />
     <MESSAGE value="2005#1" />
     <option name="LAST_COMMIT_MESSAGE" value="2005#1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/hooks/Steps.java</url>
+          <line>91</line>
+          <properties class="hooks.Steps" method="checkSomethingMustBe">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

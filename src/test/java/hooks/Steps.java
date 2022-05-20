@@ -12,8 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static api.Routes.FILE_URL;
-import static api.Routes.TRASH_URL;
+import static api.Routes.*;
 import static api.Specification.setQuery;
 import static api.Waiter.waitForStatusOperation;
 import static api.Waiter.waitStatusCode;
@@ -31,6 +30,11 @@ public class Steps {
     @Given("upload file {string} to {string}")
     public void uploadFile(String name, String pathToSetFile) {
         response = setQuery(POST, "/upload?path=" + pathToSetFile + "/" + name + "&url=" + FILE_URL + "");
+    }
+
+    @Given("upload test file {string} to {string}")
+    public void uploadTestFile(String name, String pathToSetFile) {
+        response = setQuery(POST, "/upload?path=" + pathToSetFile + "/" + name + "&url=" + test_file_url + "");
     }
 
     @Then("status code is {int}")
@@ -84,27 +88,32 @@ public class Steps {
         getInfo = response.jsonPath().getObject("", GetInfo.class);
     }
 
-    @And("check {string} must be {string}")
-    public void checkSomethingMustBe(String key, String value) {
+    @And("check {string} key {string} must have value {string}")
+    public void checkSomethingMustBe(String name, String key, String value) {
         Map<String, Object> map = new HashMap<>();
-        map.put("antivirusStatus", getInfo.getEmbedded().getItems().get(0).antivirusStatus);
-        map.put("commentIds", getInfo.getEmbedded().getItems().get(0).commentIds);
-        map.put("created", getInfo.getEmbedded().getItems().get(0).created);
-        map.put("exif", getInfo.getEmbedded().getItems().get(0).exif);
-        map.put("file", getInfo.getEmbedded().getItems().get(0).file);
-        map.put("md5", getInfo.getEmbedded().getItems().get(0).md5);
-        map.put("mediaType", getInfo.getEmbedded().getItems().get(0).mediaType);
-        map.put("modified", getInfo.getEmbedded().getItems().get(0).modified);
-        map.put("name", getInfo.getEmbedded().getItems().get(0).name);
-        map.put("path", getInfo.getEmbedded().getItems().get(0).path);
-        map.put("preview", getInfo.getEmbedded().getItems().get(0).preview);
-        map.put("resourceId", getInfo.getEmbedded().getItems().get(0).resourceId);
-        map.put("revision", getInfo.getEmbedded().getItems().get(0).revision);
-        map.put("type", getInfo.getEmbedded().getItems().get(0).type);
-        map.put("mimeType", getInfo.getEmbedded().getItems().get(0).mimeType);
-        map.put("sha256", getInfo.getEmbedded().getItems().get(0).sha256);
-        map.put("size", getInfo.getEmbedded().getItems().get(0).size);
-        Assert.assertEquals(value, map.get(key));
+        List<ItemsItem> items = getInfo.getEmbedded().getItems();
+        for (int i=0; i<items.size(); i++) {
+            if (items.get(i).name.equals(name)) {
+                map.put("antivirusStatus", getInfo.getEmbedded().getItems().get(i).antivirusStatus);
+                map.put("commentIds", getInfo.getEmbedded().getItems().get(i).commentIds);
+                map.put("created", getInfo.getEmbedded().getItems().get(i).created);
+                map.put("exif", getInfo.getEmbedded().getItems().get(i).exif);
+                map.put("file", getInfo.getEmbedded().getItems().get(i).file);
+                map.put("md5", getInfo.getEmbedded().getItems().get(i).md5);
+                map.put("mediaType", getInfo.getEmbedded().getItems().get(i).mediaType);
+                map.put("modified", getInfo.getEmbedded().getItems().get(i).modified);
+                map.put("name", getInfo.getEmbedded().getItems().get(i).name);
+                map.put("path", getInfo.getEmbedded().getItems().get(i).path);
+                map.put("preview", getInfo.getEmbedded().getItems().get(i).preview);
+                map.put("resourceId", getInfo.getEmbedded().getItems().get(i).resourceId);
+                map.put("revision", getInfo.getEmbedded().getItems().get(i).revision);
+                map.put("type", getInfo.getEmbedded().getItems().get(i).type);
+                map.put("mimeType", getInfo.getEmbedded().getItems().get(i).mimeType);
+                map.put("sha256", getInfo.getEmbedded().getItems().get(i).sha256);
+                map.put("size", getInfo.getEmbedded().getItems().get(i).size);
+            }
+        }
+        Assert.assertEquals(value, map.get(key).toString());
     }
 
     @And("do {string} resource from {string} to {string}")
