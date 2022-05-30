@@ -1,7 +1,6 @@
 package hooks;
 
 import io.cucumber.java.AfterAll;
-//import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
@@ -19,7 +18,6 @@ public class Setup {
         waitStatusCode(response, 202, 204);
         System.out.println("trash cleaned");
     }
-//
     @BeforeAll
     public static void setup() {
         System.setProperty("java.util.logging.SimpleFormatter.format", "%1$tT %4$s %5$s%6$s%n");
